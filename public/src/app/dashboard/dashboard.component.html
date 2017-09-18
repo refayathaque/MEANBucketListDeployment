@@ -1,0 +1,97 @@
+<div class="container">
+
+    <h3><i>{{ user?.username }}</i></h3>
+
+    <h2>Add your bucket list item</h2>
+
+    <form (submit)='addItem()' #formData='ngForm'>
+
+        <div class="form-group row justify-content-center" [ngClass]="{'has-warning' : title.errors, 'has-success' : !title.errors}">
+            <label class="col-2 col-form-label">Title</label>
+            <div class="col-8">
+                <input class="form-control" type="text" name="title" size="50" required minlength="20" [(ngModel)]="bucketList.title" #title='ngModel' [ngClass]="{'form-control-warning' : title.errors, 'form-control-success' : !title.errors}">
+                <small class="form-text text-muted message" [hidden]='!title.errors'>has to be longer</small>
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center" [ngClass]="{'has-warning' : description.errors, 'has-success' : !description.errors}">
+            <label class="col-2 col-form-label">Description</label>
+            <div class="col-8">
+                <input class="form-control" type="text" name="description" size="50" required minlength="100" [(ngModel)]="bucketList.description" #description='ngModel' [ngClass]="{'form-control-warning' : description.errors, 'form-control-success' : !description.errors}">
+                <small class="form-text text-muted message" [hidden]='!description.errors'>come on, give us some substance</small>
+            </div>
+        </div>
+
+        <div *ngIf='usersExclSessionUser.length !== 0'>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-2 col-form-label">Friend</label>
+                <div class="col-8 select">
+                    <select name="friend" [(ngModel)]="bucketList.friend" #friend='ngModel'>
+                        <option class="dropdown-item" value=""></option>
+                        <option class="dropdown-item" *ngFor='let friend of usersExclSessionUser' value="{{ friend?._id }}">{{ friend.username }}</option>
+                    </select>
+                    <small class="form-text text-muted message">not required</small>
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="submit" value="submit" [disabled]="!formData.valid">Add to list</button>
+
+    </form>
+
+    <div *ngIf='userItems[0].items.length !== 0'>
+
+        <h3>Your items</h3>
+
+        <table class="table table-hover table-responsive">
+
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>description</th>
+                    <th>added</th>
+                    <th>updated</th>
+                    <th>status</th>
+                    <th> < change</th>
+                    <th>update</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of userItems[0].items">
+                    <td class="left_align">{{ item.title | json }}</td>
+                    <td class="left_align">{{ item.description | json }}</td>
+                    <td class="left_align">{{ item.createdAt | date: 'd MMM y, h:mm a' }}</td>
+                    <td class="left_align">{{ item.updatedAt | date: 'd MMM y, h:mm a' }}</td>
+                    <td class="left_align" *ngIf="item.status === false">pending</td>
+                    <td class="left_align" *ngIf="item.status === true">done</td>
+                    <td class="left_align"><button class="btn btn-outline-warning table_buttons" (click)='changeItemStatus(item._id)'>toggle</button></td>
+                    <td><button class="btn btn-outline-warning table_buttons" (click)='updateForm(item)'>toggle</button></td>
+                    <td><button class="table_buttons"(click)='delete(item._id)' id='hiddenButton'><i class="fa fa-trash-o fa-lg" id="red" aria-hidden="true"></i></button></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+    <div *ngIf="updateBoolean">
+
+        <app-update [item]='item' (anEventEmitter)="dataFromChild($event)"></app-update>
+
+    </div>
+
+    <h3 id="friends_header" *ngIf='usersExclSessionUser.length !== 0'>Click a friend to see their bucket list items</h3>
+
+    <div *ngFor='let friend of usersExclSessionUser'>
+
+        <a [routerLink]="['/show', friend?._id]">{{ friend.username }}</a>
+
+    </div>
+
+    <button type="button" id='logout' class="btn btn-outline-secondary" name="logout" (click)='logout()'>Logout</button>
+
+</div>

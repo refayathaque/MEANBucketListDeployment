@@ -1,0 +1,21 @@
+.container {
+
+}
+button {
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+#user {
+    text-align: left;
+    color: #5CB85C;
+    margin-bottom: 15px;
+}
+h2 {
+    margin-bottom: 20px;
+}
+.left_align {
+    text-align: left;
+}
+#yellow {
+    color: #F0AD4E;
+}

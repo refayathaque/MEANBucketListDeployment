@@ -1,0 +1,40 @@
+<div class="container">
+
+    <form (submit)='update($event)' #formData='ngForm'>
+
+        <h2>Update item details</h2>
+
+        <div class="form-group row justify-content-center" [ngClass]="{'has-warning' : title.errors, 'has-success' : !title.errors}">
+            <label class="col-2 col-form-label">Title</label>
+            <div class="col-8">
+                <input class="form-control" type="text" name="title" size="50" required minlength="10" [(ngModel)]="bucketList.title" #title='ngModel' [ngClass]="{'form-control-warning' : title.errors, 'form-control-success' : !title.errors}" placeholder="{{ item.title }}">
+            </div>
+        </div>
+
+        <div class="form-group row justify-content-center" [ngClass]="{'has-warning' : description.errors, 'has-success' : !description.errors}">
+            <label class="col-2 col-form-label">Description</label>
+            <div class="col-8">
+                <input class="form-control" type="text" name="description" size="50" required minlength="100" [(ngModel)]="bucketList.description" #description='ngModel' [ngClass]="{'form-control-warning' : description.errors, 'form-control-success' : !description.errors}" placeholder="{{ item.description }}">
+            </div>
+        </div>
+
+        <div *ngIf='item_updated'>
+
+            <div class="form-group row justify-content-center">
+                <label class="col-2 col-form-label">Last Updated</label>
+                <div class="col-8">
+                    <p id="update_time">{{ item.updatedAt |  date: 'd MMM y, h:mm a' }}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <br *ngIf='!item_updated'>
+
+        <button type="submit" class="btn btn-primary" name="submit" value="submit" [disabled]="!formData.valid">Update</button>
+
+        <p><i class="fa fa-caret-up" aria-hidden="true"></i> toggle to hide after updating <i class="fa fa-caret-up" aria-hidden="true"></i></p>
+
+    </form>
+
+</div>

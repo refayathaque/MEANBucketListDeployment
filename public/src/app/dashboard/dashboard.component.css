@@ -1,0 +1,54 @@
+.container {
+    /*margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+    border: 1px solid #009933;*/
+    padding-top: 15px;
+}
+h3 {
+    text-align: left;
+    color: #5CB85C;
+}
+.message {
+    text-align: left;
+}
+.select {
+    text-align: left;
+}
+input.ng-valid {
+    color: #5CB85C;
+}
+input.ng-invalid {
+    color: #F0AD4E;
+}
+input.ng-pristine {
+    color: black;
+}
+button {
+    margin-bottom: 20px;
+}
+#logout {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+h2 {
+    margin-bottom: 20px;
+    text-align: left;
+}
+#red {
+    color: red;
+}
+#friends_header {
+    margin-top: 30px;
+    text-align: center;
+}
+.table_buttons {
+    margin: -2.5px;
+}
+#hiddenButton {
+    background: none;
+    border: none;
+}
+.left_align {
+    text-align: left;
+}

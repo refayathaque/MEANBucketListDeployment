@@ -1,0 +1,22 @@
+.container {
+    padding-top: 22.5px;
+}
+input.ng-valid {
+    color: #5CB85C;
+}
+input.ng-invalid {
+    color: #F0AD4E;
+}
+input.ng-pristine {
+    color: black;
+}
+.message {
+    text-align: left;
+}
+button {
+    margin-top: 20px;
+    margin-bottom: 22.5px;
+}
+label {
+    text-align: left;
+}
