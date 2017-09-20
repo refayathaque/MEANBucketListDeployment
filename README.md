@@ -1,1 +1,3 @@
 # MEANBucketListDeployment
+
+# In the Deployment section of the platform follow until 'sudo mongod', you'll likely see an error related to /data/db so then run 'sudo mkdir /data/db -p', (not sure but about this but maybe try running 'sudo mongod' after this to see if it's running? it might already be running...), then do 'pm2 start server.js', then go into the public folder and do 'sudo npm install' (this installs all your ng2 dependencies), then do 'npm install @angular/cli', then finally do 'ng build', after this point your app should be live EVEN THOUGH you might see that the mongo server is NOT running. 
